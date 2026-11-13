@@ -1,18 +1,13 @@
 name: Deploy Notebook
 
 on:
-  push:
-    branches:
-      - main
-      - dev
-  repository_dispatch:
-    types: [trigger-build-dev, trigger-build-latest]
+    push:
+        branches:
+            - main
+            - dev
+    repository_dispatch:
+        types: [trigger-build-dev, trigger-build-latest]
 
 jobs:
-  call-parent-build:
-    uses: msd-live/build-jupyter-notebook/.github/workflows/notebook-image-build.yml@main
-    secrets:
-      AWS_ACCESS_KEY_ID_FOR_ECR_MIRROR: ${{ secrets.AWS_ACCESS_KEY_ID_FOR_ECR_MIRROR }}
-      AWS_SECRET_ACCESS_KEY_FOR_ECR_MIRROR: ${{ secrets.AWS_SECRET_ACCESS_KEY_FOR_ECR_MIRROR }}
-      AWS_REGION_FOR_ECR_MIRROR: ${{ secrets.AWS_REGION_FOR_ECR_MIRROR }}
-      AWS_ECR_REPOSITORY_FOR_ECR_MIRROR: ${{ secrets.AWS_ECR_REPOSITORY_FOR_ECR_MIRROR }}
+    call-parent-build:
+        uses: msd-live/build-jupyter-notebook/.github/workflows/notebook-image-build.yml@main
