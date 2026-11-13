@@ -1,15 +1,12 @@
-FROM ghcr.io/msd-live/jupyter/python-notebook:latest
+FROM ghcr.io/msd-live/jupyter/datascience-notebook:latest
 
 USER root
 
-# RUN git clone --depth=1 --branch=main https://github.com/IMMM-SFA/msd_uncertainty_ebook.git msd_uncertainty_ebook
-# RUN cd msd_uncertainty_ebook && pip install .
-RUN pip install msdbook
+RUN git clone --depth=1 --branch=dev https://github.com/IMMM-SFA/msd_uncertainty_ebook.git msd_uncertainty_ebook
+RUN cd msd_uncertainty_ebook && pip install .
 
 # Install msdbook data
-# RUN mkdir -p /opt/conda/lib/python3.11/site-packages/msdbook/data
-# RUN python -c 'from msdbook.install_supplement import install_package_data; install_package_data()'
+RUN mkdir -p /opt/conda/lib/python3.11/site-packages/msdbook/data
+RUN python -c 'from msdbook.install_supplement import install_package_data; install_package_data()'
 
 COPY notebooks /home/jovyan/notebooks
-
-RUN ln -s /data /home/jovyan/notebooks/data
